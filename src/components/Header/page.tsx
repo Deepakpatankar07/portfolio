@@ -26,7 +26,7 @@ export default function Header() {
   const [isActive, setIsActive] = useState<boolean>(false);
   const pathname = usePathname();
   const button = useRef<HTMLDivElement>(null);
-  const [selectedIndicator, setSelectedIndicator] = useState<string>(pathname);
+  const [, setSelectedIndicator] = useState<string>(pathname);
   const [isButtonVisible, setIsButtonVisible] = useState<boolean>(false);
 
   const isProjectPage = pathname === "/projects" || pathname === "/resume";

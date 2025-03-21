@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 interface MagneticProps {
-  children: React.ReactElement<any>;
+  children: React.ReactElement;
 }
 
 const Magnetic: React.FC<MagneticProps> = ({ children }) => {
@@ -49,8 +49,8 @@ const Magnetic: React.FC<MagneticProps> = ({ children }) => {
     };
   }, []);
 
-  return React.cloneElement(children, { ref: magnetic } as any);
+  // Type the ref prop explicitly for cloneElement
+  return React.cloneElement(children, { ref: magnetic } as { ref: React.RefObject<HTMLDivElement> });
 };
 
 export default Magnetic;
-

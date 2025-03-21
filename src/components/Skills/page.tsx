@@ -89,7 +89,7 @@ const Skills = forwardRef<HTMLDivElement>((props, ref) => {
           </div>
           <div className="flex justify-center ">
             <div className="text-white text-[38px] md:text-7xl font-normal">
-              Let's work <br /> together
+            {"Let's work"} <br /> together
             </div>
           </div>
         </div>

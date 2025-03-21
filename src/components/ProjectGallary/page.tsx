@@ -13,25 +13,25 @@ const projects = [
     title: "EL Meet",
     src: "/images/el-meet.png",
     color: "#d8d3cd",
-    hostedUrl: undefined
+    hostedUrl: undefined,
   },
   {
     title: "Zapier",
     src: "/images/zapier.png",
     color: "#b1a994",
-    hostedUrl: undefined
+    hostedUrl: undefined,
   },
   {
     title: "Cryto Wallet",
     src: "/images/crypto-wallet.png",
     color: "#706D63",
-    hostedUrl: "https://dwallets-crypto.vercel.app"
+    hostedUrl: "https://dwallets-crypto.vercel.app",
   },
   {
     title: "Infinite Gallery",
     src: "/images/infinite-gallery.png",
     color: "#8C8C8C",
-    hostedUrl: "https://infinite-image-gallery-nu.vercel.app"
+    hostedUrl: "https://infinite-image-gallery-nu.vercel.app",
   },
 ];
 
@@ -60,56 +60,58 @@ export default function Home() {
   const cursor = useRef<HTMLDivElement>(null);
   const cursorLabel = useRef<HTMLDivElement>(null);
 
-
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
-      let target = event.target as HTMLElement;
-  
-      // console.log("Clicked Element:", target);
-  
+      // console.log("Clicked Element:", (event.target as HTMLElement));
+
       //Check if click happened inside the View button
       let isInsideViewButton = false;
       if (cursorLabel.current) {
         const rect = cursorLabel.current.getBoundingClientRect();
         const x = event.clientX;
         const y = event.clientY;
-  
-        isInsideViewButton =  x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+
+        isInsideViewButton =
+          x >= rect.left &&
+          x <= rect.right &&
+          y >= rect.top &&
+          y <= rect.bottom;
       }
-  
+
       //If clicked inside View, trigger navigation
       if (isInsideViewButton) {
         console.log("View button clicked");
-  
+
         if (modal.active) {
           const project = projects[modal.index];
-          if (project.hostedUrl && project.hostedUrl.length > 0 && !project.hostedUrl.startsWith("#")) {
+          if (
+            project.hostedUrl &&
+            project.hostedUrl.length > 0 &&
+            !project.hostedUrl.startsWith("#")
+          ) {
             window.open(project.hostedUrl, "_blank");
           } else {
             router.push(`/projects`);
           }
         }
-  
+
         event.stopPropagation(); //Stop bubbling
         return;
       }
     };
-  
+
     document.addEventListener("click", handleClick);
     return () => {
       document.removeEventListener("click", handleClick);
     };
   }, [modal.active, modal.index, router]);
-  
-  
-  
 
-  let xMoveContainer = useRef<gsap.QuickToFunc | null>(null);
-  let yMoveContainer = useRef<gsap.QuickToFunc | null>(null);
-  let xMoveCursor = useRef<gsap.QuickToFunc | null>(null);
-  let yMoveCursor = useRef<gsap.QuickToFunc | null>(null);
-  let xMoveCursorLabel = useRef<gsap.QuickToFunc | null>(null);
-  let yMoveCursorLabel = useRef<gsap.QuickToFunc | null>(null);
+  const xMoveContainer = useRef<gsap.QuickToFunc | null>(null);
+  const yMoveContainer = useRef<gsap.QuickToFunc | null>(null);
+  const xMoveCursor = useRef<gsap.QuickToFunc | null>(null);
+  const yMoveCursor = useRef<gsap.QuickToFunc | null>(null);
+  const xMoveCursorLabel = useRef<gsap.QuickToFunc | null>(null);
+  const yMoveCursorLabel = useRef<gsap.QuickToFunc | null>(null);
 
   useEffect(() => {
     if (modalContainer.current && cursor.current && cursorLabel.current) {
@@ -164,7 +166,9 @@ export default function Home() {
       onMouseMove={(e) => moveItems(e.clientX, e.clientY)}
       className="bg-[#f2f2f2] text-black flex items-center flex-col px-4 md:px-28 pb-16 md:pb-20"
     >
-      <div className="text-center md:text-left w-full md:pl-32 mb-12 opacity-50">Projects</div>
+      <div className="text-center md:text-left w-full md:pl-32 mb-12 opacity-50">
+        Projects
+      </div>
       <motion.div className=" w-full flex flex-col items-center justify-center mb-16 md:mb-[100px]">
         {projects.map((project, index) => (
           <Project
@@ -224,7 +228,7 @@ export default function Home() {
           className="w-[80px] h-[80px] rounded-full bg-[#455CE9] text-white fixed z-[3] flex items-center justify-center text-sm font-light pointer-events-none"
         ></motion.div>
         <motion.div
-        id="view-button-Id"
+          id="view-button-Id"
           ref={cursorLabel}
           variants={scaleAnimation}
           initial="initial"

@@ -17,16 +17,15 @@ export default function Landing() {
   const firstText = useRef<HTMLParagraphElement>(null);
   const secondText = useRef<HTMLParagraphElement>(null);
   const slider = useRef<HTMLDivElement>(null);
-  const mainRef = useRef<HTMLElement>(null); // Ref for motion.main
-  let xPercent: number = 0;
-  let direction: number = -1;
+  const mainRef = useRef<HTMLElement>(null);
+  const xPercentRef = useRef<number>(0); 
+  const directionRef = useRef<number>(-1); 
   const animationFrameId = useRef<number | null>(null);
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     if (!slider.current || !firstText.current || !secondText.current || !mainRef.current) {
-      // console.log("One or more refs are null, skipping animation setup");
       return;
     }
 
@@ -35,11 +34,11 @@ export default function Landing() {
 
     const tl = gsap.to(slider.current, {
       scrollTrigger: {
-        trigger: mainRef.current, // Use motion.main as trigger instead of document.documentElement
+        trigger: mainRef.current,
         scrub: 0.25,
         start: "top top",
         end: "bottom top",
-        onUpdate: (e) => (direction = e.direction * -1),
+        onUpdate: (e) => (directionRef.current = e.direction * -1),
       },
       x: "-500px",
     });
@@ -47,29 +46,27 @@ export default function Landing() {
     animationFrameId.current = requestAnimationFrame(animate);
 
     return () => {
-      // console.log("Cleaning up Landing animations");
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
       }
-      tl.kill(); // Only kill this specific timeline
+      tl.kill();
     };
   }, []);
 
   const animate = () => {
     if (!firstText.current || !secondText.current) {
-      // console.log("Text refs are null, stopping animation");
       return;
     }
 
-    if (xPercent < -100) {
-      xPercent = 0;
-    } else if (xPercent > 0) {
-      xPercent = -100;
+    if (xPercentRef.current < -100) {
+      xPercentRef.current = 0;
+    } else if (xPercentRef.current > 0) {
+      xPercentRef.current = -100;
     }
 
-    gsap.set(firstText.current, { xPercent: xPercent });
-    gsap.set(secondText.current, { xPercent: xPercent });
-    xPercent += 0.1 * direction;
+    gsap.set(firstText.current, { xPercent: xPercentRef.current });
+    gsap.set(secondText.current, { xPercent: xPercentRef.current });
+    xPercentRef.current += 0.1 * directionRef.current;
 
     animationFrameId.current = requestAnimationFrame(animate);
   };

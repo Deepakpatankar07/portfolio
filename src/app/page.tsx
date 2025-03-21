@@ -13,13 +13,6 @@ export default function Home() {
   const descriptionRef = useRef<HTMLDivElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
 
-  // Function to scroll to a ref
-  const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
-    if (ref.current) {
-      ref.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   useEffect(() => {
     if (!isLoading) return;
 
@@ -30,8 +23,8 @@ export default function Home() {
       window.scrollTo(0, 0);
     }, 2000);
 
-    return () => clearTimeout(timer); // Cleanup on unmount
-  }, []);
+    return () => clearTimeout(timer);
+  }, [isLoading]);
 
   return (
     <main className="relative">
