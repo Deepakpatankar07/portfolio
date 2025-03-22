@@ -28,3 +28,11 @@ body {
 a {
   color: var(--foreground);
 }
+
+@layer utilities {
+  /* Customize scrollbar */
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  
+}
