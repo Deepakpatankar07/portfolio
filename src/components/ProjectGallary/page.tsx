@@ -22,7 +22,7 @@ const projects = [
     hostedUrl: undefined,
   },
   {
-    title: "Cryto Wallet",
+    title: "Crypto Wallet",
     src: "/images/crypto-wallet.png",
     color: "#706D63",
     hostedUrl: "https://dwallets-crypto.vercel.app",

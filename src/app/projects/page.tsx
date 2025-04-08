@@ -23,7 +23,7 @@ const projects = [
     year: "2025",
   },
   {
-    title: "Cryto Wallet",
+    title: "Crypto Wallet",
     demo: undefined,
     hostedUrl: "https://dwallets-crypto.vercel.app",
     githubUrl: "https://github.com/DeepakPatankar07/crypto-wallets",
