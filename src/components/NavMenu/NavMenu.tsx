@@ -87,7 +87,7 @@ export default function NavMenu({ onClose }: { onClose?: () => void }) {
               Github
             </Link>
             <Link
-              href="https://www.Linkedin.com/deepak-patankar"
+              href="https://www.linkedin.com/in/deepak-patankar"
               className="hover:underline"
             >
               LinkedIn

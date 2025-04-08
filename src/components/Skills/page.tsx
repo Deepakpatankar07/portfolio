@@ -131,7 +131,7 @@ const Skills = forwardRef<HTMLDivElement>((props, ref) => {
             <Link href="https://github.com/Deepakpatankar07" className="hover:underline">
               Github
             </Link>
-            <Link href="https://www.Linkedin.com/deepak-patankar" className="px-2 md:px-0 hover:underline">
+            <Link href="https://www.linkedin.com/in/deepak-patankar" className="px-2 md:px-0 hover:underline">
               LinkedIn
             </Link>
             <div className="cursor-pointer hover:underline w-fit whitespace-nowrap">
